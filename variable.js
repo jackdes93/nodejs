@@ -13,10 +13,15 @@
 //   console.log(`Server running at http://${hostname}:${port}/`);
 // });
 
-var diem = 10;
+var state = "ONF";
 
-if (diem >= 5) {
-  console.log('Success!');
-} else {
-  console.log('Fail! :(');
+switch (state) {
+  case 'ON':
+    console.log(`Lamp is ${state}`);
+    break;
+    case 'OFF':
+    console.log(`Lamp is ${state}`);
+  default:
+  console.log(`Lamp isn't available`);
+
 }
