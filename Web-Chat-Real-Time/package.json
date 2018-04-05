@@ -1,0 +1,11 @@
+{
+  "name": "chatrealtime",
+  "version": "1.0.0",
+  "description": "Demo web chat reat time by use nodejs & socketio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dev-PBinh",
+  "license": "ISC"
+}
