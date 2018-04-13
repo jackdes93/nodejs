@@ -10,9 +10,12 @@
   <h2>Hello</h2>
 </body>
 <script src="jquery.min.js"> </script>
+<script src="socket.io/socket.io.js"></script>
 <script>
+// Connect to server
+var socket = io("http://localhost:8000");
   $(document).ready(function(){
-    alert('secc!');
+
   });
 </script>
 </html>
