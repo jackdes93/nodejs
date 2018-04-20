@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Web Chat RealTime</title>
+  <link rel="stylesheet" href="/master.css">
 </head>
 <body>
-  <h2>Hello</h2>
+  <h1>Web Chat RealTime by Socket IO</h1>
+  <hr>
+  <div class="wrapmain">
+    <div class="login-form">
+      <h2 class="title">F.A Community (FAC)<h2>
+      <input type="text" name="txtUserName" value="" placeholder="User name">
+      <input type="password" name="txtPassWord" value="" placeholder="Password">
+      <input type="button" name="btn-login" value="Login">
+    </div>
+    <div class="content-chat"></div>
+  </div>
 </body>
 <script src="jquery.min.js"> </script>
 <script src="socket.io/socket.io.js"></script>
