@@ -1,5 +1,12 @@
-.wrapmain { display: block; position: relative; box-sizing: border-box; width: 100%; max-width: 1200px; height: auto;}
+.wrapmain { display: block; position: relative; box-sizing: border-box; width: 100%; max-width: 1200px; height: auto; margin: 0 auto;}
 .login-form { display: block; position: relative; box-sizing: border-box; width: 500px; height: auto; margin: 10px auto; border: 1px solid #cccc; padding: 5px;text-align: center; overflow: auto; border-radius: 10px; background-color: #e4e7ea;}
-input[type="text"], input[name="txtPassWord"] { width: 80%; height: 32px; border-radius: 10px; margin: 4px auto; box-sizing: border-box;  padding: 2px 6px; border: 1px solid #cecece; font-size: 1em;}
-input[name="btn-login"] { width: 120px; height: 32px;  margin: 10px auto; border-radius: 5px; border: 1px solid #1183d8; font-size: 1em; font-weight: 500; background-color: #1183d8; color:#fff;}
+input[type="text"], input[name="txtPassWord"] { width: 80%; height: 32px; border-radius: 10px; margin: 4px auto; box-sizing: border-box;  padding: 2px 6px; border: 1px solid #cecece; font-size: .8em;}
+input[name="btn-login"] { width: 120px; height: 32px;  margin: 10px auto; border-radius: 5px; border: 1px solid #1183d8; font-size: .7em; font-weight: 500; background-color: #1183d8; color:#fff;}
 .title { color:#1D61FB; font-family: helvetica sans-serif; font-weight: 600;}
+/*  Form chat */
+.content-chat { width: 100%; height: auto; display: inline-block; box-sizing: border-box; margin: 0 auto;border: 1px solid #1183d8;}
+.list-online { width: 25%; height: auto; box-sizing: border-box; overflow: auto; padding: 4px;  float: left; background-color: transparent; }
+.wrapper { width: 75%; height: auto; box-sizing: border-box; overflow: auto; padding: 5px; float: right; background-color: #fff; border-left: 1px solid #1183d9;}
+.header-user { width: 100%; height: auto; box-sizing: border-box; display: inline-block; border-bottom: 1px solid #1183d8;}
+.header-user h5 { float: left; }
+input[name="btn-logOut"] { float:left; margin: 20px auto 20px 85%;}
