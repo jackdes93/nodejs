@@ -27,17 +27,25 @@
           </span>
         </div>
       </div>
-      <div class="content-chat"></div>
+      <div class="content-chat">
+        <div class="list-friend">
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+        </div>
+        <div class="frame-chat">
+          <div class="input-chat">
+            <input type="text" name="txtInputChat" value="" placeholder="Type message here....">
+            <input type="button" name="btn-send" value="Send">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
 <script src="jquery.min.js"> </script>
 <script src="socket.io/socket.io.js"></script>
-<script>
-// Connect to server
-var socket = io("http://localhost:8000");
-  $(document).ready(function(){
-
-  });
-</script>
+<script src="app.js"></script>
 </html>
