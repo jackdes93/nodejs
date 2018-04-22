@@ -12,6 +12,9 @@ var socket = io("http://localhost:8000");
       var txtPassWord = $("input[name='txtPassWord']").val();
       var data = {'username': txtUserName, 'password':txtPassWord};
       socket.emit("Client-register-User", data);
+      socket.on("Request-Notification-To-Client", function(message){
+          alert(message);
+      });
     });
 
 

@@ -2,13 +2,14 @@ var express = require("express");
 var app = express();
 var arrayDataUser = ['AAA','dev_pbinh'];
 var message = "";
+
 app.use(express.static("./public"));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(8000);
-
+import './definedConst.js';
 io.on("connection", function(socket){
   console.log("Have connection with id: "+ socket.id);
     socket.on("disconnect", function(){

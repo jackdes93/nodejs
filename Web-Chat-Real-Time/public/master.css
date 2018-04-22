@@ -19,3 +19,9 @@ input[name="btn-logout"] { width: 10%; float: right;box-sizing: border-box; heig
 .input-chat { position: absolute; left: 0px; bottom: 5px; width: 100%; height: auto; box-sizing: border-box; overflow: auto; padding:0 10px; display: flex;}
 input[name="txtInputChat"] { width: 90%; box-sizing: border-box; float: left;}
 input[name="btn-send"] { width: 10%; margin: auto 0 auto 10px; height: 30px; border-radius:20px; border: 1px solid #3670ec; background-color: #3670ec; color: #fff; font-weight: 400; font-size:14px;}
+.box-alert {position: relative; height: auto; width: 100%; max-width: 600px; padding: 4px; box-sizing: border-box; margin: 10px auto;}
+#notifi-content { display: block; font-family: helvetica sans-serif; font-weight: bold; text-align: center;}
+.success { color: #2fc70c; border: 2px solid #3bf20f; border-radius: 10px; background-color: #eff6f0;}
+.success p:after { content: 'Success!';}
+.fail { color: #f01f1f; border: 2px solid #f01f1f; border-radius: 10px; background-color: #f9e2e2;}
+.fail p:after { content: 'Fail!';}
