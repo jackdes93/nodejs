@@ -9,8 +9,6 @@ const REQUEST_NOTIFI_T_CLIENT = "Request-Notification-To-Client";
     $("input[name='txtUserName']").focus();
 
     $("input[name='btn-login']").click(function(){
-      // $("#login-form").hide(2000);
-      // $("#content-chat").show(3000);
       var txtUserName = $("input[name='txtUserName']").val();
       var txtPassWord = $("input[name='txtPassWord']").val();
       var data = {'username': txtUserName, 'password':txtPassWord};
