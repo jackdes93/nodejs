@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Chat RealTime</title>
+  <link rel="stylesheet" href="/master.css">
+</head>
+<body>
+  <h1>Web Chat RealTime by Socket IO</h1>
+  <hr>
+  <div class="wrapmain">
+    <div class="box-alert">
+      <p id="notifi-content"></p>
+      <p id="mess-content"></p>
+    </div>
+    <div class="login-form" id="login-form">
+      <h2 class="title">F.A Community (FAC)<h2>
+      <input type="text" name="txtUserName" value="" placeholder="User name">
+      <input type="password" name="txtPassWord" value="" placeholder="Password">
+      <input type="button" name="btn-login" value="Login">
+    </div>
+    <div class="wrapper" id="content-chat">
+      <div class="header-chat">
+        <div class="list-online"> <p class="title-name">Friends Online</p></div>
+        <div class="header-name">
+          <span>
+            <p class="title-name">User A</p>
+            <input type="button" name="btn-logout" value="Log Out">
+          </span>
+        </div>
+      </div>
+      <div class="content-chat">
+        <div class="list-friend">
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+          <p>adfafdaf</p>
+        </div>
+        <div class="frame-chat">
+          <div class="input-chat">
+            <input type="text" name="txtInputChat" value="" placeholder="Type message here....">
+            <input type="button" name="btn-send" value="Send">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="jquery.min.js"> </script>
+<script src="socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</html>
