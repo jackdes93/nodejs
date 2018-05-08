@@ -4,6 +4,18 @@ const CLIENT_REGISTER_USER = "Client-register-User";
 const REQUEST_NOTIFI_T_CLIENT = "Request-Notification-To-Client";
 const REQUEST_NOTIFI_F_SERVER = "Request-Notification-From-Server";
 
+socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
+  var listUser = data['listUser'];
+  var userLogin = data['user-login'];
+  console.log(listUser.length);
+    $('.list-friend').empty();
+  for(var i = 0; i < listUser.length; i++) {
+    $('.list-friend').append('<p>' + listUser[i]['username'] + '</p>');
+  }
+  // $('.title-name').text(userLogin);
+});
+
+
   $(document).ready(function(){
     $("#login-form").show();
     $("#content-chat").hide(100);
@@ -32,12 +44,5 @@ const REQUEST_NOTIFI_F_SERVER = "Request-Notification-From-Server";
               $('#mess-content').text('');
             }, 2000);
       });
-      socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
-        // console.log('access');
-        console.log(data);
-      });
-
-
     });
-
   });
