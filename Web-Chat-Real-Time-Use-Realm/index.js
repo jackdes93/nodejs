@@ -21,13 +21,12 @@ io.on("connection", function(socket){
     socket.on(constants.CLIENT_REGISTER_USER, function(data){
        if (arrayDataUser.length == 0) {
          arrayDataUser.push({'username': data['username'], 'password':data['password']});
-         message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'status' : 0};
+         message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'status' : 0, 'userLogin': data['username']};
          socket.emit(constants.REQUEST_NOTIFI_T_CLIENT, message);
        } else {
          checkUserIsHave(arrayDataUser, data, socket)
        }
-       var result = {'listUser' : arrayDataUser, 'user-login' : socket.id}
-       io.sockets.emit(constants.REQUEST_NOTIFI_F_SERVER, result);
+       io.sockets.emit(constants.REQUEST_NOTIFI_F_SERVER, arrayDataUser);
     });
 
 });
@@ -46,12 +45,10 @@ function findIndexByKey(arrayDataUser, key, valueSearch) {
 }
 function checkUserIsHave(arrayDataUser, data, socket) {
   if(findIndexByKey(arrayDataUser, 'username', data['username']) >= 0){
-    message = {'message':data['username'] + ' đã tồn tại trong hệ thống', 'status' : 1};
+    message = {'message':data['username'] + ' đã tồn tại trong hệ thống', 'status' : 1, 'userLogin': ''};
   } else {
-    message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'status' : 0};
+    message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'status' : 0, 'userLogin': data['username']};
     arrayDataUser.push({'username': data['username'], 'password':data['password']});
-    // var result = {'listUser' : arrayDataUser, 'user-login' : data['username']}
-    // socket.emit(constants.REQUEST_NOTIFI_F_SERVER, result);
   }
   socket.emit(constants.REQUEST_NOTIFI_T_CLIENT, message);
 }

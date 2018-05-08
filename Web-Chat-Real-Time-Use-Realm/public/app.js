@@ -1,18 +1,14 @@
 // Connect to server
-var socket = io("http://localhost:8000");
+var socket = io("http://192.168.1.5:8000");
 const CLIENT_REGISTER_USER = "Client-register-User";
 const REQUEST_NOTIFI_T_CLIENT = "Request-Notification-To-Client";
 const REQUEST_NOTIFI_F_SERVER = "Request-Notification-From-Server";
 
 socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
-  var listUser = data['listUser'];
-  var userLogin = data['user-login'];
-  console.log(listUser.length);
     $('.list-friend').empty();
-  for(var i = 0; i < listUser.length; i++) {
-    $('.list-friend').append('<p>' + listUser[i]['username'] + '</p>');
+  for(var i = 0; i < data.length; i++) {
+    $('.list-friend').append('<p>' + data[i]['username'] + '</p>');
   }
-  // $('.title-name').text(userLogin);
 });
 
 
@@ -35,6 +31,7 @@ socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
               $(".box-alert").addClass("success");
               $('#login-form').hide();
               $('#content-chat').show();
+              $('#title-name').text(message['userLogin']);
           }
           $('#mess-content').text(message['message']);
           setTimeout(function() {
