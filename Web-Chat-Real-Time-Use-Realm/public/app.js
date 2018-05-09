@@ -1,8 +1,16 @@
 // Connect to server
 var socket = io("http://192.168.1.5:8000");
-const CLIENT_REGISTER_USER = "Client-register-User";
-const REQUEST_NOTIFI_T_CLIENT = "Request-Notification-To-Client";
-const REQUEST_NOTIFI_F_SERVER = "Request-Notification-From-Server";
+// constants
+const CLIENT_REGISTER_USER = 'Client-register-User';
+const CLIENT_LOGIN = 'Client-login';
+const REQUEST_NOTIFI_T_CLIENT = 'Request-Notification-To-Client';
+const REQUEST_NOTIFI_F_SERVER = 'Request-Notification-From-Server';
+const SERVER_NOTIFI_LOGIN = 'Server-Notification-Login-State';
+
+// Function
+function getLogin(username, password) {
+
+}
 
 socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
     $('.list-friend').empty();
@@ -11,13 +19,12 @@ socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
   }
 });
 
-
   $(document).ready(function(){
     $("#login-form").show();
     $("#content-chat").hide(100);
     $("input[name='txtUserName']").focus();
 
-    $("input[name='btn-login']").click(function(){
+    $("input[name='btn-register']").click(function() {
       var txtUserName = $("input[name='txtUserName']").val();
       var txtPassWord = $("input[name='txtPassWord']").val();
       var data = {'username': txtUserName, 'password':txtPassWord};
@@ -41,5 +48,17 @@ socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
               $('#mess-content').text('');
             }, 2000);
       });
+    });
+
+    $("input[name='btn-login']").click(function() {
+
+    });
+
+    $("input[name='btn-logout']").click(function() {
+      socket.disconnect();
+      $('#login-form').show();
+      $('#content-chat').hide(2000);
+      $("input[name='txtUserName']").val('');
+      $("input[name='txtPassWord']").val('');
     });
   });

@@ -1,7 +1,8 @@
 .wrapmain { display: block; position: relative; box-sizing: border-box; width: 100%; max-width: 1200px; height: auto; margin: 0 auto;}
-.login-form { display: block; position: relative; box-sizing: border-box; width: 500px; height: auto; margin: 10px auto; border: 1px solid #cccc; padding: 5px;text-align: center; overflow: auto; border-radius: 10px; background-color: #e4e7ea;}
+.login-form { display: block; position: relative; box-sizing: border-box; width: 500px; height: auto; margin: 10px auto; border: 1px solid #cccc; padding: 5px;text-align: center; overflow: auto; border-radius: 10px; background-color: #F2FEFF;}
 input[type="text"], input[name="txtPassWord"] { width: 80%; height: 32px; border-radius: 10px; margin: 4px auto; box-sizing: border-box;  padding: 2px 6px; border: 1px solid #cecece; font-size: .8em;}
-input[name="btn-login"] { width: 120px; height: 32px;  margin: 10px auto; border-radius: 5px; border: 1px solid #1183d8; font-size: .7em; font-weight: 500; background-color: #1183d8; color:#fff;}
+input[name="btn-login"] { width: 120px; height: 32px;  margin: 10px auto; border-radius: 5px; border: 1px solid #4267B2; font-size: .7em; font-weight: 500; background-color: #4267B2; color:#fff;}
+input[name="btn-register"] { width: 120px; height: 32px;  margin: 10px auto; border-radius: 5px; border: 1px solid #42C554; font-size: .7em; font-weight: 500; background-color: #42C554; color:#fff;}
 .title { color:#1D61FB; font-family: helvetica sans-serif; font-weight: 600;}
 /*  Form chat */
 .wrapper { width: 100%; max-width: 1200px; height: auto; box-sizing: border-box; overflow: auto; background-color: #fff; border: 1px solid #1183d9;}
