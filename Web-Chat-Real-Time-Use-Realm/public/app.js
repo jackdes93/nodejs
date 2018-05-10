@@ -1,5 +1,6 @@
 // Connect to server
-var socket = io("http://192.168.1.5:8000");
+var socket = io("http://localhost:8000");
+
 // constants
 const CLIENT_REGISTER_USER = 'Client-register-User';
 const CLIENT_LOGIN = 'Client-login';
@@ -9,7 +10,28 @@ const SERVER_NOTIFI_LOGIN = 'Server-Notification-Login-State';
 
 // Function
 function getLogin(username, password) {
+  var data = {'username' : username, 'password' : password};
+  socket.emit(CLIENT_LOGIN, data);
+  socket.on(SERVER_NOTIFI_LOGIN, function(result) {
+    if (result['state'] == '0') {
+        $(".box-alert").addClass("fail");
+        $("input[name='txtUserName']").val('');
+        $("input[name='txtPassWord']").val('');
+    } else {
+        $(".box-alert").addClass("success");
+        $('#login-form').hide();
+        $('#content-chat').show();
+        // $('#title-name').text(message['userLogin']);
+    }
+    $('#mess-content').text(result['message']);
+    setTimeout(function() {
+        $(".box-alert").removeClass("success");
+        $(".box-alert").removeClass("fail");
+        $('#notifi-content').text('');
+        $('#mess-content').text('');
+      }, 2000);
 
+  });
 }
 
 socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
@@ -17,6 +39,21 @@ socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
   for(var i = 0; i < data.length; i++) {
     $('.list-friend').append('<p>' + data[i]['username'] + '</p>');
   }
+});
+
+socket.on(REQUEST_NOTIFI_T_CLIENT, function(message) {
+  if (message['state'] == '1') {
+      $(".box-alert").addClass("fail");
+      $("input[name='txtUserName']").val('');
+      $("input[name='txtPassWord']").val('');
+  }
+  $('#mess-content').text(message['message']);
+  setTimeout(function() {
+      $(".box-alert").removeClass("success");
+      $(".box-alert").removeClass("fail");
+      $('#notifi-content').text('');
+      $('#mess-content').text('');
+    }, 2000);
 });
 
   $(document).ready(function(){
@@ -30,7 +67,7 @@ socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
       var data = {'username': txtUserName, 'password':txtPassWord};
       socket.emit(CLIENT_REGISTER_USER, data);
       socket.on(REQUEST_NOTIFI_T_CLIENT, function(message){
-          if (message['status'] == '1') {
+          if (message['state'] == '1') {
               $(".box-alert").addClass("fail");
               $("input[name='txtUserName']").val('');
               $("input[name='txtPassWord']").val('');
@@ -51,7 +88,12 @@ socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
     });
 
     $("input[name='btn-login']").click(function() {
+      var txtUserName = $("input[name='txtUserName']").val();
+      var txtPassWord = $("input[name='txtPassWord']").val();
+      getLogin(txtUserName, txtPassWord);
+      socket.on(SERVER_NOTIFI_LOGIN, function(data) {
 
+      });
     });
 
     $("input[name='btn-logout']").click(function() {

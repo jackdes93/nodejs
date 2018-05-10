@@ -21,7 +21,7 @@ io.on("connection", function(socket){
     socket.on(constants.CLIENT_REGISTER_USER, function(data){
        if (arrayDataUser.length == 0) {
          arrayDataUser.push({'username': data['username'], 'password':data['password'], 'state' : 1});
-         message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'status' : 0, 'userLogin': data['username']};
+         message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'state' : 0, 'userLogin': data['username']};
          socket.emit(constants.REQUEST_NOTIFI_T_CLIENT, message);
        } else {
          checkUserIsHave(arrayDataUser, data, socket)
@@ -47,25 +47,26 @@ function findIndexByKey(arrayDataUser, key, valueSearch) {
   return -1;
 }
 
-function notificationFromServer(socket, key, result) {
-  return socket.emit(key, function(result));
-}
-
 function checkUserIsHave(arrayDataUser, data, socket) {
   if(findIndexByKey(arrayDataUser, 'username', data['username']) >= 0){
-    message = {'message':data['username'] + ' đã tồn tại trong hệ thống', 'status' : 1, 'userLogin': ''};
+    message = {'message':data['username'] + ' đã tồn tại trong hệ thống', 'state' : 1, 'userLogin': ''};
   } else {
-    message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'status' : 0, 'userLogin': data['username']};
+    message = {'message':'Bạn đã đăng ký thành công với username là '+ data['username'], 'state' : 0, 'userLogin': data['username']};
     arrayDataUser.push({'username': data['username'], 'password':data['password'], 'state' : 1});
   }
   socket.emit(constants.REQUEST_NOTIFI_T_CLIENT, message);
 }
 
 function getLogin(socket, arrayDataUser, username, password) {
-  var index = findIndexByKey(arrayDataUser, 'username', data['username']);
-  var result = (username != arrayDataUser[index]['username']) || (password != arrayDataUser[index]['password']) ?? 0 : 1;
-  console.log(result);
-  // notificationFromServer(constants.SERVER_NOTIFI_LOGIN, result);
+  var index = findIndexByKey(arrayDataUser, 'username', username);
+  if (index >= 0) {
+     var state = (username != arrayDataUser[index]['username']) || (password != arrayDataUser[index]['password']) ? 0 : 1;
+     var result = state == 0 ? {'message' : 'Tài khoản hoặc mật khẩu không chính xác.', 'state' : 0} : {'message' : 'Chúc mừng bạn đăng nhập thành công.', 'state' : 1};
+     socket.emit(constants.SERVER_NOTIFI_LOGIN, result);
+  } else {
+    message = {'message' : 'Tài khoản này không tồn tại trong hệ thống', 'state' : 1};
+    socket.emit(constants.REQUEST_NOTIFI_T_CLIENT, message);
+  }
 }
 // Route
 app.get("/", function(req, res){
