@@ -1,6 +1,6 @@
 // Connect to server
 var socket = io("http://localhost:8000");
-
+var state = 0;
 // constants
 const CLIENT_REGISTER_USER = 'Client-register-User';
 const CLIENT_LOGIN = 'Client-login';
@@ -21,7 +21,8 @@ function getLogin(username, password) {
         $(".box-alert").addClass("success");
         $('#login-form').hide();
         $('#content-chat').show();
-        // $('#title-name').text(message['userLogin']);
+        $('#title-name').text(result['userLogin']);
+        state = 1;
     }
     $('#mess-content').text(result['message']);
     setTimeout(function() {
@@ -32,6 +33,11 @@ function getLogin(username, password) {
       }, 2000);
 
   });
+}
+
+function checkAuthorization() {
+  var result = state == 0 ? 'Unauthorization' : 'Authorization';
+  console.log(result);
 }
 
 socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
@@ -56,7 +62,8 @@ socket.on(REQUEST_NOTIFI_T_CLIENT, function(message) {
     }, 2000);
 });
 
-  $(document).ready(function(){
+$(document).ready(function(){
+    checkAuthorization();
     $("#login-form").show();
     $("#content-chat").hide(100);
     $("input[name='txtUserName']").focus();
@@ -91,9 +98,6 @@ socket.on(REQUEST_NOTIFI_T_CLIENT, function(message) {
       var txtUserName = $("input[name='txtUserName']").val();
       var txtPassWord = $("input[name='txtPassWord']").val();
       getLogin(txtUserName, txtPassWord);
-      socket.on(SERVER_NOTIFI_LOGIN, function(data) {
-
-      });
     });
 
     $("input[name='btn-logout']").click(function() {
@@ -102,5 +106,8 @@ socket.on(REQUEST_NOTIFI_T_CLIENT, function(message) {
       $('#content-chat').hide(2000);
       $("input[name='txtUserName']").val('');
       $("input[name='txtPassWord']").val('');
+      socket.connect();
+      state = 0;
     });
+
   });

@@ -16,6 +16,8 @@ input[name="btn-register"] { width: 120px; height: 32px;  margin: 10px auto; bor
 input[name="btn-logout"] { width: 10%; float: right;box-sizing: border-box; height: 30px; margin: auto 0; border-radius: 20px; border: 1px solid #cecece;}
 .list-friend, .frame-chat { height: 300px; box-sizing: border-box; padding: 10px; overflow: auto; background-color: #fff; float: left;}
 .list-friend { width: 25%; border-right: 1px solid #1183d8;}
+.list-friend p { padding: 6px;}
+.list-friend p:hover { background-color: #ccc; }
 .frame-chat { width: 75%; position: relative; }
 .input-chat { position: absolute; left: 0px; bottom: 5px; width: 100%; height: auto; box-sizing: border-box; overflow: auto; padding:0 10px; display: flex;}
 input[name="txtInputChat"] { width: 90%; box-sizing: border-box; float: left;}

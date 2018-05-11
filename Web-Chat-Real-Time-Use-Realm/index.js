@@ -12,12 +12,12 @@ var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(8000);
 
-
 io.on("connection", function(socket){
   console.log("Have connection with id: "+ socket.id);
     socket.on("disconnect", function(){
       console.log(socket.id + " disconnect");
     });
+
     socket.on(constants.CLIENT_REGISTER_USER, function(data){
        if (arrayDataUser.length == 0) {
          arrayDataUser.push({'username': data['username'], 'password':data['password'], 'state' : 1});
@@ -31,6 +31,7 @@ io.on("connection", function(socket){
 
     socket.on(constants.CLIENT_LOGIN, function(data) {
        getLogin(socket, arrayDataUser, data['username'], data['password']);
+       io.sockets.emit(constants.REQUEST_NOTIFI_F_SERVER, arrayDataUser);
     });
 });
 
@@ -61,7 +62,7 @@ function getLogin(socket, arrayDataUser, username, password) {
   var index = findIndexByKey(arrayDataUser, 'username', username);
   if (index >= 0) {
      var state = (username != arrayDataUser[index]['username']) || (password != arrayDataUser[index]['password']) ? 0 : 1;
-     var result = state == 0 ? {'message' : 'Tài khoản hoặc mật khẩu không chính xác.', 'state' : 0} : {'message' : 'Chúc mừng bạn đăng nhập thành công.', 'state' : 1};
+     var result = state == 0 ? {'message' : 'Tài khoản hoặc mật khẩu không chính xác.', 'state' : 0, 'userLogin' : ''} : {'message' : 'Chúc mừng bạn đăng nhập thành công.', 'state' : 1, 'userLogin' : username};
      socket.emit(constants.SERVER_NOTIFI_LOGIN, result);
   } else {
     message = {'message' : 'Tài khoản này không tồn tại trong hệ thống', 'state' : 1};
