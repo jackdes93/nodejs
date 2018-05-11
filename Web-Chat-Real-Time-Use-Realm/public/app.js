@@ -1,12 +1,14 @@
 // Connect to server
 var socket = io("http://localhost:8000");
-var state = 0;
 // constants
 const CLIENT_REGISTER_USER = 'Client-register-User';
 const CLIENT_LOGIN = 'Client-login';
 const REQUEST_NOTIFI_T_CLIENT = 'Request-Notification-To-Client';
 const REQUEST_NOTIFI_F_SERVER = 'Request-Notification-From-Server';
 const SERVER_NOTIFI_LOGIN = 'Server-Notification-Login-State';
+const AUTHORIZATION = 'Authorization';
+const UN_AUTHORIZATION = 'Un-Authorization';
+
 
 // Function
 function getLogin(username, password) {
@@ -22,7 +24,6 @@ function getLogin(username, password) {
         $('#login-form').hide();
         $('#content-chat').show();
         $('#title-name').text(result['userLogin']);
-        state = 1;
     }
     $('#mess-content').text(result['message']);
     setTimeout(function() {
@@ -35,9 +36,9 @@ function getLogin(username, password) {
   });
 }
 
-function checkAuthorization() {
-  var result = state == 0 ? 'Unauthorization' : 'Authorization';
-  console.log(result);
+function setAuthorization(arrayDataUser, index, key) {
+  var inforAuthor = {'index' : index, 'username' : arrayDataUser[index]['username']}
+  socket.emit(key, inforAuthor);
 }
 
 socket.on(REQUEST_NOTIFI_F_SERVER, function(data) {
@@ -62,8 +63,7 @@ socket.on(REQUEST_NOTIFI_T_CLIENT, function(message) {
     }, 2000);
 });
 
-$(document).ready(function(){
-    checkAuthorization();
+$(document).ready(function() {
     $("#login-form").show();
     $("#content-chat").hide(100);
     $("input[name='txtUserName']").focus();

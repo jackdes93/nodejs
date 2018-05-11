@@ -4,4 +4,6 @@ module.exports = Object.freeze({
     REQUEST_NOTIFI_T_CLIENT :'Request-Notification-To-Client',
     REQUEST_NOTIFI_F_SERVER :'Request-Notification-From-Server',
     SERVER_NOTIFI_LOGIN : 'Server-Notification-Login-State',
+    AUTHORIZATION : 'Authorization',
+    UN_AUTHORIZATION : 'Un-Authorization',
 });
