@@ -8,11 +8,12 @@ const REQUEST_NOTIFI_F_SERVER = 'Request-Notification-From-Server';
 const SERVER_NOTIFI_LOGIN = 'Server-Notification-Login-State';
 const AUTHORIZATION = 'Authorization';
 const UN_AUTHORIZATION = 'Un-Authorization';
+const CLIENT_LOGOUT = 'Client-Logout';
 
 
 // Function
 function getLogin(username, password) {
-  var data = {'username' : username, 'password' : password};
+  var data = {'username' : username, 'password' : password, 'state' : 1};
   socket.emit(CLIENT_LOGIN, data);
   socket.on(SERVER_NOTIFI_LOGIN, function(result) {
     if (result['state'] == '0') {
@@ -34,6 +35,15 @@ function getLogin(username, password) {
       }, 2000);
 
   });
+}
+
+function getLogout(username) {
+  var data = {'username' : username, 'state' : 0};
+  socket.emit(CLIENT_LOGOUT, data);
+  $('#login-form').show();
+  $('#content-chat').hide(2000);
+  $("input[name='txtUserName']").val('');
+  $("input[name='txtPassWord']").val('');
 }
 
 function setAuthorization(arrayDataUser, index, key) {
@@ -62,6 +72,10 @@ socket.on(REQUEST_NOTIFI_T_CLIENT, function(message) {
       $('#mess-content').text('');
     }, 2000);
 });
+
+window.onbeforeunload = function() {
+    return 'reload';
+}
 
 $(document).ready(function() {
     $("#login-form").show();
@@ -101,13 +115,8 @@ $(document).ready(function() {
     });
 
     $("input[name='btn-logout']").click(function() {
-      socket.disconnect();
-      $('#login-form').show();
-      $('#content-chat').hide(2000);
-      $("input[name='txtUserName']").val('');
-      $("input[name='txtPassWord']").val('');
-      socket.connect();
-      state = 0;
+      var username = $("input[name='txtUserName']").val();
+      getLogout(username);
     });
 
   });

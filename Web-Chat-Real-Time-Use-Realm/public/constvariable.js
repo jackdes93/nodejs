@@ -6,4 +6,5 @@ module.exports = Object.freeze({
     SERVER_NOTIFI_LOGIN : 'Server-Notification-Login-State',
     AUTHORIZATION : 'Authorization',
     UN_AUTHORIZATION : 'Un-Authorization',
+    CLIENT_LOGOUT : 'Client-Logout',
 });

@@ -38,6 +38,51 @@ io.on("connection", function(socket){
 /*
   Some function for server
 */
+function makeSecurityCode(input) {
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[]{}()*&^#@";
+
+  for (var i = 0; i < 64; i++)
+    input += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return input;
+}
+
+// function setCookie(username,value) {
+//     var today = new Date();
+//     expires = today.setDate(today.getDate() + 1);
+//     document.cookie = "username =" + username + ";expires=" + expires.toUTCString() + ";secure=" + escape(makeSecurityCode(value));
+//     return b64EncodeUnicode(document.cookie);
+// }
+//
+// function getCookie(cname) {
+//     var name = cname + "=";
+//     var decodedCookie = decodeURIComponent(document.cookie);
+//     var ca = decodedCookie.split(';');
+//     for(var i = 0; i <ca.length; i++) {
+//         var c = ca[i];
+//         while (c.charAt(0) == ' ') {
+//             c = c.substring(1);
+//         }
+//         if (c.indexOf(name) == 0) {
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return "";
+// }
+//
+// function checkCookie() {
+//     var user=getCookie("username");
+//     if (user != "") {
+//         alert("Welcome again " + user);
+//     } else {
+//        user = prompt("Please enter your name:","");
+//        if (user != "" && user != null) {
+//           setCookie(user,11235);
+//            // setCookie("username", user, 30);
+//        }
+//     }
+// }
+
 function findIndexByKey(arrayDataUser, key, valueSearch) {
   for (var i = 0; i < arrayDataUser.length; i++) {
     if(arrayDataUser[i][key] == valueSearch)
